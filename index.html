@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miera Ligzda | Nest of Peace - Latvian Sauna Retreat</title>
+    <meta name="description" content="Experience ultimate relaxation at Miera Ligzda, where traditional Latvian pirts sauna and serene surroundings await near the Baltic Sea.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --amber-deep: #9A7B4F;
+            --amber-warm: #C4A35A;
+            --amber-glow: #D4B86A;
+            --stone-warm: #A69076;
+            --stone-light: #C4B5A0;
+            --forest-sage: #6B7B5D;
+            --forest-deep: #4A5240;
+            --cream-warm: #F5F0E8;
+            --cream-light: #FAF7F2;
+            --charcoal: #2C2416;
+            --charcoal-soft: #3D3425;
+            --steam-white: rgba(255, 252, 245, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background-color: var(--cream-warm);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Grain overlay for texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav.scrolled {
+            background: rgba(245, 240, 232, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 4rem;
+            box-shadow: 0 2px 30px rgba(44, 36, 22, 0.08);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--charcoal);
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            transition: all 0.3s ease;
+            object-fit: contain;
+        }
+
+        /* On dark hero - invert to white */
+        .nav:not(.scrolled) .logo-icon {
+            filter: invert(1);
+        }
+
+        /* On scrolled light background - keep black */
+        .nav.scrolled .logo-icon {
+            filter: none;
+        }
+
+        .logo:hover .logo-icon {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--amber-deep);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(
+                135deg,
+                var(--charcoal) 0%,
+                var(--charcoal-soft) 50%,
+                #4A3D2E 100%
+            );
+            overflow: hidden;
+        }
+
+        /* Steam animation */
+        .steam-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            opacity: 0.4;
+        }
+
+        .steam {
+            position: absolute;
+            bottom: -50%;
+            width: 100%;
+            height: 200%;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 100%, var(--steam-white) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 60% 90%, var(--steam-white) 0%, transparent 45%),
+                radial-gradient(ellipse 70% 45% at 80% 95%, var(--steam-white) 0%, transparent 50%);
+            animation: steamRise 12s ease-in-out infinite;
+        }
+
+        .steam:nth-child(2) {
+            animation-delay: -4s;
+            opacity: 0.6;
+        }
+
+        .steam:nth-child(3) {
+            animation-delay: -8s;
+            opacity: 0.3;
+        }
+
+        @keyframes steamRise {
+            0%, 100% {
+                transform: translateY(10%) scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-5%) scale(1.1);
+                opacity: 0.6;
+            }
+        }
+
+        /* Decorative elements */
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(196, 163, 90, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 80% 20%, rgba(107, 123, 93, 0.08) 0%, transparent 25%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--amber-warm);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 0.3s;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 300;
+            color: var(--cream-light);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--amber-glow);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--stone-light);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 0.7s;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 3rem;
+            background: var(--amber-deep);
+            color: var(--cream-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border: 1px solid var(--amber-warm);
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 0.9s;
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: var(--amber-warm);
+            transform: translateY(-2px);
+        }
+
+        .hero-cta svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--stone-light);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 1.2s;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--amber-warm), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; height: 50px; }
+            50% { opacity: 1; height: 70px; }
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            padding: 10rem 4rem;
+            background: var(--cream-warm);
+            position: relative;
+        }
+
+        .philosophy::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, var(--charcoal), transparent);
+            opacity: 0.03;
+        }
+
+        .section-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--amber-deep);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: var(--amber-deep);
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .philosophy-content h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--charcoal);
+        }
+
+        .philosophy-content h2 em {
+            font-style: italic;
+            color: var(--forest-sage);
+        }
+
+        .philosophy-text {
+            font-size: 1.1rem;
+            color: var(--charcoal-soft);
+            margin-bottom: 1.5rem;
+        }
+
+        .philosophy-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--amber-deep);
+            padding-left: 2rem;
+            border-left: 2px solid var(--amber-warm);
+            margin: 3rem 0;
+        }
+
+        .philosophy-visual {
+            position: relative;
+            height: 600px;
+        }
+
+        .philosophy-image {
+            position: absolute;
+            background: var(--stone-warm);
+            overflow: hidden;
+        }
+
+        .philosophy-image.main {
+            width: 80%;
+            height: 70%;
+            right: 0;
+            top: 10%;
+            background: linear-gradient(135deg, var(--charcoal-soft) 0%, var(--charcoal) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .philosophy-image.main.video-only {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+        }
+
+        .philosophy-image.accent {
+            width: 45%;
+            height: 40%;
+            left: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--amber-deep) 0%, var(--amber-warm) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .image-placeholder {
+            color: var(--cream-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+        .philosophy-video,
+        .philosophy-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 10rem 4rem;
+            background: var(--charcoal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 50% 80% at 0% 50%, rgba(196, 163, 90, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 40% 60% at 100% 80%, rgba(107, 123, 93, 0.06) 0%, transparent 40%);
+        }
+
+        .services-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-header .section-label {
+            justify-content: center;
+        }
+
+        .services-header .section-label::after {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: var(--amber-deep);
+        }
+
+        .services-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--cream-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .services-header p {
+            color: var(--stone-light);
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card {
+            background: rgba(255, 252, 245, 0.03);
+            border: 1px solid rgba(196, 163, 90, 0.2);
+            padding: 4rem 3rem;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--amber-deep), var(--forest-sage));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover {
+            background: rgba(255, 252, 245, 0.06);
+            transform: translateY(-5px);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 2rem;
+            color: var(--amber-warm);
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--cream-light);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--stone-light);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 10rem 4rem;
+            background: var(--cream-warm);
+        }
+
+        .experience-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 6rem;
+        }
+
+        .experience-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--cream-light);
+            border: 1px solid rgba(166, 144, 118, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(44, 36, 22, 0.1);
+        }
+
+        .experience-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--amber-warm), var(--amber-deep));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .experience-icon svg {
+            width: 36px;
+            height: 36px;
+            color: var(--cream-light);
+        }
+
+        .experience-item h3 {
+            font-size: 1.4rem;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .experience-item p {
+            color: var(--charcoal-soft);
+            font-size: 1rem;
+        }
+
+        /* Nature Section */
+        .nature {
+            padding: 10rem 4rem;
+            background: linear-gradient(135deg, var(--forest-deep) 0%, var(--charcoal) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nature::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L30 60M0 30L60 30' stroke='%23ffffff' stroke-width='0.5' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .nature-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nature-content .section-label {
+            justify-content: center;
+            color: var(--forest-sage);
+        }
+
+        .nature-content .section-label::before,
+        .nature-content .section-label::after {
+            background: var(--forest-sage);
+        }
+
+        .nature-content .section-label::after {
+            content: '';
+            width: 60px;
+            height: 1px;
+        }
+
+        .nature-content h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            color: var(--cream-light);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .nature-content h2 em {
+            color: var(--amber-glow);
+            font-style: italic;
+        }
+
+        .nature-content p {
+            font-size: 1.2rem;
+            color: var(--stone-light);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .nature-features {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .nature-feature {
+            text-align: center;
+        }
+
+        .nature-feature-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            color: var(--amber-warm);
+        }
+
+        .nature-feature span {
+            display: block;
+            color: var(--cream-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 10rem 4rem;
+            background: var(--cream-light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            color: var(--charcoal-soft);
+            margin-bottom: 3rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+            color: var(--amber-deep);
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .contact-item-content span {
+            display: block;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--stone-warm);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item-content p {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            margin: 0;
+        }
+
+        .contact-form {
+            background: var(--cream-warm);
+            padding: 3rem;
+            border: 1px solid rgba(166, 144, 118, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--charcoal-soft);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(166, 144, 118, 0.3);
+            background: var(--cream-light);
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            color: var(--charcoal);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--amber-deep);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: var(--charcoal);
+            color: var(--cream-light);
+            border: none;
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .form-submit:hover {
+            background: var(--amber-deep);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem;
+            background: var(--charcoal);
+            text-align: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            filter: invert(1);
+        }
+
+        .footer-logo span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--cream-light);
+        }
+
+        .footer-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--stone-light);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links a {
+            color: var(--stone-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--amber-warm);
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: var(--stone-warm);
+            opacity: 0.6;
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 2px;
+            background: var(--charcoal);
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .philosophy-visual {
+                height: 400px;
+                order: -1;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--cream-warm);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .philosophy,
+            .services,
+            .experience,
+            .nature,
+            .contact {
+                padding: 6rem 2rem;
+            }
+
+            .experience-items {
+                grid-template-columns: 1fr;
+            }
+
+            .nature-features {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="#" class="logo">
+            <img src="logo-transparent.png" alt="Miera Ligzda Logo" class="logo-icon">
+            <span class="logo-text">Miera Ligzda</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="steam-container">
+            <div class="steam"></div>
+            <div class="steam"></div>
+            <div class="steam"></div>
+        </div>
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">Nest of Peace</p>
+            <h1 class="hero-title">Experience <em>Ultimate</em> Relaxation</h1>
+            <p class="hero-description">Discover unparalleled tranquility at Miera Ligzda, where soothing sauna and serene surroundings await in the heart of the Baltic Sea.</p>
+            <a href="#contact" class="hero-cta">
+                Book Your Retreat
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="scroll-indicator">
+            <span>Discover</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy" id="philosophy">
+        <div class="philosophy-grid">
+            <div class="philosophy-content reveal">
+                <div class="section-label">Our Philosophy</div>
+                <h2>Where <em>Steam</em> Meets <em>Spirit</em></h2>
+                <p class="philosophy-text">In the Latvian tradition, the pirts is far more than a sauna—it is a sacred space where physical, emotional, and spiritual purification converge. For centuries, our ancestors understood that true wellness embraces body, mind, and soul as one.</p>
+                <p class="philosophy-text">The Latvian word "garīgais" carries a profound duality: it means both "steam" and "spirit." This ancient wisdom reminds us that in the gentle embrace of warmth and vapor, we find not only physical cleansing but spiritual renewal.</p>
+                <blockquote class="philosophy-quote">
+                    "In the pirts, we do not simply bathe—we are reborn."
+                </blockquote>
+            </div>
+            <div class="philosophy-visual reveal">
+                <div class="philosophy-image main video-only">
+                    <video autoplay muted loop playsinline class="philosophy-video">
+                        <source src="video-compressed.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-header reveal">
+            <div class="section-label">What We Offer</div>
+            <h2>Unwind at Our Guest House & Sauna</h2>
+            <p>Two pillars of tranquility await you at Miera Ligzda—restful accommodation and authentic Latvian pirts.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <svg class="service-icon" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="8" y="20" width="44" height="32" rx="2"/>
+                    <path d="M8 28h44"/>
+                    <path d="M20 28v-8h20v8"/>
+                    <circle cx="30" cy="40" r="6"/>
+                    <path d="M15 52v-4M45 52v-4"/>
+                </svg>
+                <h3>Cozy Accommodation</h3>
+                <p>Enjoy our comfortable room, designed for tranquility and restful sleep. Wake to the gentle sounds of nature, surrounded by the peaceful embrace of Latvian forest and sea. Each space is thoughtfully appointed to nurture your rest and rejuvenation.</p>
+            </div>
+            <div class="service-card reveal">
+                <svg class="service-icon" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="5" y="25" width="50" height="30" rx="2"/>
+                    <path d="M10 25v-5a5 5 0 015-5h30a5 5 0 015 5v5"/>
+                    <path d="M15 35h10M35 35h10"/>
+                    <path d="M20 15c0-3 2-5 5-5s5 2 5 5"/>
+                    <path d="M30 15c0-3 2-5 5-5s5 2 5 5"/>
+                    <path d="M25 8v-3M35 8v-3" stroke-linecap="round"/>
+                </svg>
+                <h3>Traditional Latvian Pirts</h3>
+                <p>Experience relaxation in our authentic sauna, perfect for unwinding. Our traditional pirts follows centuries-old rituals, offering a sacred space where the boundaries between physical and spiritual wellness dissolve into healing warmth.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="experience-header reveal">
+            <div class="section-label">The Ritual</div>
+            <h2>Traditional Elements of the Pirts</h2>
+            <p>Each session honors the ancient practices passed down through generations of Latvian pirts masters.</p>
+        </div>
+        <div class="experience-items">
+            <div class="experience-item reveal">
+                <div class="experience-icon">
+                    <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 5v26M10 8c4 6 4 14 0 20M26 8c-4 6-4 14 0 20"/>
+                        <path d="M6 15c6 1 12 1 24 0M6 21c6 1 12 1 24 0"/>
+                    </svg>
+                </div>
+                <h3>Birch Whisks</h3>
+                <p>The slota—bundles of birch branches—gently stimulate circulation and release tension, connecting you to the forest's healing essence.</p>
+            </div>
+            <div class="experience-item reveal">
+                <div class="experience-icon">
+                    <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 32c-8 0-12-6-12-14 0-10 12-14 12-14s12 4 12 14c0 8-4 14-12 14z"/>
+                        <path d="M18 8c-3 4-4 8-4 12M18 8c3 4 4 8 4 12"/>
+                        <path d="M10 18h16"/>
+                    </svg>
+                </div>
+                <h3>Herbal Infusions</h3>
+                <p>Steam infused with wild herbs—chamomile, mint, juniper—carries the healing spirits of Latvian meadows into every breath.</p>
+            </div>
+            <div class="experience-item reveal">
+                <div class="experience-icon">
+                    <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <ellipse cx="18" cy="20" rx="12" ry="8"/>
+                        <path d="M18 12v-4"/>
+                        <path d="M14 10c2-2 6-2 8 0"/>
+                        <path d="M12 18c2-1 10-1 12 0"/>
+                        <path d="M10 22c4 2 12 2 16 0"/>
+                    </svg>
+                </div>
+                <h3>Honey Treatments</h3>
+                <p>Local honey, nature's golden elixir, nourishes and purifies the skin while honoring the ancient bond between bees and Baltic people.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nature Section -->
+    <section class="nature">
+        <div class="nature-content reveal">
+            <div class="section-label">Our Location</div>
+            <h2>Embrace the <em>Baltic</em> Spirit</h2>
+            <p>Miera Ligzda rests where ancient forests meet the timeless Baltic Sea. Here, the rhythm of waves and whisper of pines create a sanctuary far from the world's noise. This is a place where nature itself becomes part of your healing journey.</p>
+            <p>Step outside to walk forest trails, breathe salt-tinged air, or simply sit in stillness as the sun sets over endless waters. Every element of our surroundings has been shaped by millennia—and invites you to find your own peace within it.</p>
+            <div class="nature-features">
+                <div class="nature-feature">
+                    <svg class="nature-feature-icon" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M25 5c-10 8-15 18-15 30h30c0-12-5-22-15-30z"/>
+                        <path d="M25 15v20"/>
+                        <path d="M18 25l7-5 7 5"/>
+                    </svg>
+                    <span>Forest Trails</span>
+                </div>
+                <div class="nature-feature">
+                    <svg class="nature-feature-icon" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 30c5-3 10-3 15 0s10 3 15 0 10-3 15 0"/>
+                        <path d="M5 38c5-3 10-3 15 0s10 3 15 0 10-3 15 0"/>
+                        <circle cx="35" cy="15" r="8"/>
+                    </svg>
+                    <span>Baltic Sea</span>
+                </div>
+                <div class="nature-feature">
+                    <svg class="nature-feature-icon" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M25 45V20"/>
+                        <path d="M25 20c-8-5-8-15 0-15s8 10 0 15z"/>
+                        <path d="M20 35c-5-3-5-10 0-10"/>
+                        <path d="M30 35c5-3 5-10 0-10"/>
+                    </svg>
+                    <span>Wild Nature</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info reveal">
+                <div class="section-label">Get in Touch</div>
+                <h2>Begin Your Journey to Peace</h2>
+                <p>Whether you seek a weekend of renewal or simply wish to learn more about the pirts tradition, we welcome your inquiry. Let us help you plan your escape to tranquility.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <div class="contact-item-content">
+                            <span>Location</span>
+                            <p>Baltic Coast, Latvia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <path d="M22 6l-10 7L2 6"/>
+                        </svg>
+                        <div class="contact-item-content">
+                            <span>Email</span>
+                            <p>hello@mieraligzda.lv</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                        </svg>
+                        <div class="contact-item-content">
+                            <span>Phone</span>
+                            <p>+371 2X XXX XXX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form reveal">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dates">Preferred Dates</label>
+                        <input type="text" id="dates" name="dates" placeholder="e.g., June 15-18, 2025">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your ideal retreat..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">
+            <img src="logo-transparent.png" alt="Miera Ligzda Logo" class="footer-logo-img">
+            <span>Miera Ligzda</span>
+        </div>
+        <p class="footer-tagline">"Where steam meets spirit, and peace finds its nest."</p>
+        <div class="footer-links">
+            <a href="#philosophy">Philosophy</a>
+            <a href="#services">Services</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p class="footer-copyright">&copy; 2025 Miera Ligzda. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add form submission logic here
+            alert('Thank you for your inquiry! We will respond within 24 hours.');
+            this.reset();
+        });
+
+        // Parallax effect for hero steam
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const steamElements = document.querySelectorAll('.steam');
+            steamElements.forEach((steam, index) => {
+                const speed = 0.1 + (index * 0.05);
+                steam.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
