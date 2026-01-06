@@ -225,13 +225,16 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            background: linear-gradient(
-                135deg,
-                var(--charcoal) 0%,
-                var(--charcoal-soft) 50%,
-                #4A3D2E 100%
-            );
+            background: url('vase.jpeg') center center / cover no-repeat;
             overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(44, 36, 22, 0.55);
+            z-index: 1;
         }
 
         /* Steam animation */
@@ -645,6 +648,168 @@
             line-height: 1.8;
         }
 
+        /* Pricing Section */
+        .pricing {
+            padding: 10rem 4rem;
+            background: var(--cream-warm);
+        }
+
+        .pricing-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem;
+        }
+
+        .pricing-header .section-label {
+            justify-content: center;
+        }
+
+        .pricing-header .section-label::after {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: var(--amber-deep);
+        }
+
+        .pricing-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--cream-light);
+            border: 1px solid rgba(166, 144, 118, 0.2);
+            padding: 2.5rem 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--forest-sage);
+            box-shadow: 0 10px 40px rgba(107, 123, 93, 0.15);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(44, 36, 22, 0.12);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            background: var(--forest-sage);
+            color: var(--cream-light);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.8rem;
+            border-radius: 3px;
+        }
+
+        .pricing-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .pricing-amount {
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-amount .price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--forest-sage);
+        }
+
+        .pricing-amount .period {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--stone-warm);
+            margin-top: -0.3rem;
+        }
+
+        .pricing-btn {
+            display: block;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            background: var(--cream-warm);
+            color: var(--charcoal);
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            border: 1px solid rgba(166, 144, 118, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-btn:hover {
+            background: var(--charcoal);
+            color: var(--cream-light);
+            border-color: var(--charcoal);
+        }
+
+        .pricing-description {
+            font-size: 0.95rem;
+            color: var(--charcoal-soft);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            border-bottom: 1px solid rgba(166, 144, 118, 0.1);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li svg {
+            width: 18px;
+            height: 18px;
+            color: var(--forest-sage);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pricing {
+                padding: 6rem 2rem;
+            }
+        }
+
         /* Experience Section */
         .experience {
             padding: 10rem 4rem;
@@ -834,6 +999,115 @@
                 grid-column: span 1;
                 grid-row: span 1;
                 height: 250px;
+            }
+        }
+
+        /* Moments Section */
+        .moments {
+            padding: 10rem 4rem;
+            background: var(--cream-light);
+        }
+
+        .moments-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem;
+        }
+
+        .moments-header .section-label {
+            justify-content: center;
+        }
+
+        .moments-header .section-label::after {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: var(--amber-deep);
+        }
+
+        .moments-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .moments-header p {
+            font-size: 1.1rem;
+            color: var(--charcoal-soft);
+        }
+
+        .moments-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .moments-item {
+            position: relative;
+            height: 450px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .moments-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .moments-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .moments-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(44, 36, 22, 0.85) 0%, rgba(44, 36, 22, 0.2) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .moments-item:hover .moments-overlay {
+            opacity: 1;
+        }
+
+        .moments-overlay h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--cream-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .moments-overlay p {
+            font-size: 1rem;
+            color: var(--stone-light);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .moments {
+                padding: 6rem 2rem;
+            }
+
+            .moments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .moments-item {
+                height: 350px;
+            }
+
+            .moments-overlay {
+                opacity: 1;
             }
         }
 
@@ -1736,8 +2010,8 @@
         <div class="hero-pattern"></div>
         <div class="hero-content">
             <p class="hero-subtitle">Nest of Peace</p>
-            <h1 class="hero-title">Experience <em>Ultimate</em> Relaxation</h1>
-            <p class="hero-description">Discover unparalleled tranquility at Miera Ligzda, where soothing sauna and serene surroundings await in the heart of the Baltic Sea.</p>
+            <h1 class="hero-title">Restore Your <em>Energy</em> at our "Peace Nest"</h1>
+            <p class="hero-description">Experience unparalleled tranquility at Miera Ligzda, where your body, mind and soul find perfect harmony with nature.</p>
             <a href="#contact" class="hero-cta">
                 Book Your Retreat
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1807,6 +2081,65 @@
         </div>
     </section>
 
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="pricing-header reveal">
+            <div class="section-label">Our Packages</div>
+            <h2>Pricings</h2>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card reveal">
+                <h3>Guest House Accommodation</h3>
+                <div class="pricing-amount">
+                    <span class="price">€120</span>
+                    <span class="period">per night</span>
+                </div>
+                <a href="#contact" class="pricing-btn">More info</a>
+                <p class="pricing-description">Enjoy a comfortable stay in our cozy rooms with all essential amenities provided.</p>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Free Wi-Fi</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Breakfast Included</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Private Bathroom</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Double Bed</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Flat Screen TV</li>
+                </ul>
+            </div>
+            <div class="pricing-card featured reveal">
+                <span class="popular-badge">Popular</span>
+                <h3>Sauna and Spa Experience</h3>
+                <div class="pricing-amount">
+                    <span class="price">€180</span>
+                    <span class="period">per night</span>
+                </div>
+                <a href="#contact" class="pricing-btn">More info</a>
+                <p class="pricing-description">Includes access to our sauna and spa facilities, along with room accommodation.</p>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Sauna Access</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Spa Treatments</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Towels Provided</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Relaxation Lounge</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Aromatherapy</li>
+                </ul>
+            </div>
+            <div class="pricing-card reveal">
+                <h3>All-Inclusive Luxury Retreat</h3>
+                <div class="pricing-amount">
+                    <span class="price">€240</span>
+                    <span class="period">per night</span>
+                </div>
+                <a href="#contact" class="pricing-btn">More info</a>
+                <p class="pricing-description">Experience an all-inclusive retreat with premium services and amenities, including all previous tiers.</p>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Full Board Meals</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Guided Tours</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Private Sauna Session</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Welcome Drink</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Late Checkout</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- Experience Section -->
     <section class="experience" id="experience">
         <div class="experience-header reveal">
@@ -1860,28 +2193,43 @@
         </div>
         <div class="gallery-grid">
             <div class="gallery-item reveal">
-                <div class="gallery-placeholder">
-                    <span>Sauna Interior</span>
-                </div>
+                <img src="sauna.jpg" alt="Traditional Latvian Sauna Interior">
             </div>
             <div class="gallery-item reveal">
-                <div class="gallery-placeholder">
-                    <span>Forest Path</span>
-                </div>
+                <img src="forest.jpg" alt="Peaceful Forest Path">
             </div>
             <div class="gallery-item reveal">
-                <div class="gallery-placeholder">
-                    <span>Baltic Shore</span>
-                </div>
+                <img src="party.jpg" alt="Celebration Moments">
             </div>
             <div class="gallery-item reveal">
-                <div class="gallery-placeholder">
-                    <span>Guest Room</span>
-                </div>
+                <img src="tea.jpg" alt="Herbal Tea Experience">
             </div>
             <div class="gallery-item reveal">
-                <div class="gallery-placeholder">
-                    <span>Birch Whisks</span>
+                <img src="beach.jpeg" alt="Baltic Beach">
+            </div>
+        </div>
+    </section>
+
+    <!-- Moments Section -->
+    <section class="moments" id="moments">
+        <div class="moments-header reveal">
+            <div class="section-label">Life at Miera Ligzda</div>
+            <h2>Moments of Joy</h2>
+            <p>Where nature's beauty meets heartfelt connections</p>
+        </div>
+        <div class="moments-grid">
+            <div class="moments-item reveal">
+                <img src="leaf.jpg" alt="Nature's Details">
+                <div class="moments-overlay">
+                    <h3>Nature's Embrace</h3>
+                    <p>Find peace in the smallest details of the natural world</p>
+                </div>
+            </div>
+            <div class="moments-item reveal">
+                <img src="family.jpg" alt="Family Moments">
+                <div class="moments-overlay">
+                    <h3>Cherished Bonds</h3>
+                    <p>Create lasting memories with those who matter most</p>
                 </div>
             </div>
         </div>
