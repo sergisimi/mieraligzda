@@ -155,6 +155,69 @@
             width: 100%;
         }
 
+        /* Nav Right (Language + Book Now) */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--charcoal);
+            font-family: 'Crimson Text', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        .lang-btn:hover {
+            opacity: 1;
+        }
+
+        .lang-btn.active {
+            opacity: 1;
+            border-color: var(--amber-deep);
+            color: var(--amber-deep);
+        }
+
+        .nav-book-btn {
+            background: var(--amber-deep);
+            color: var(--cream-light);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--amber-warm);
+            transition: all 0.3s ease;
+        }
+
+        .nav-book-btn:hover {
+            background: transparent;
+            color: var(--amber-deep);
+        }
+
+        /* Light text on dark hero */
+        .nav:not(.scrolled) .nav-links a,
+        .nav:not(.scrolled) .lang-btn {
+            color: var(--cream-light);
+        }
+
+        .nav:not(.scrolled) .lang-btn.active {
+            color: var(--amber-warm);
+            border-color: var(--amber-warm);
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -231,21 +294,21 @@
 
         .hero-subtitle {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
-            letter-spacing: 0.4em;
+            font-size: 1.1rem;
+            letter-spacing: 0.5em;
             text-transform: uppercase;
             color: var(--amber-warm);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             opacity: 0;
             animation: fadeUp 1s ease forwards 0.3s;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-size: clamp(3rem, 9vw, 6.5rem);
             font-weight: 300;
             color: var(--cream-light);
-            line-height: 1.1;
-            margin-bottom: 2rem;
+            line-height: 1.05;
+            margin-bottom: 2.5rem;
             opacity: 0;
             animation: fadeUp 1s ease forwards 0.5s;
         }
@@ -256,10 +319,11 @@
         }
 
         .hero-description {
-            font-size: 1.2rem;
+            font-size: 1.35rem;
             color: var(--stone-light);
-            max-width: 600px;
-            margin: 0 auto 3rem;
+            max-width: 650px;
+            margin: 0 auto 3.5rem;
+            line-height: 1.8;
             opacity: 0;
             animation: fadeUp 1s ease forwards 0.7s;
         }
@@ -279,6 +343,8 @@
             transition: all 0.4s ease;
             opacity: 0;
             animation: fadeUp 1s ease forwards 0.9s;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-cta:hover {
@@ -647,6 +713,130 @@
             font-size: 1rem;
         }
 
+        /* Gallery Section */
+        .gallery {
+            padding: 10rem 4rem;
+            background: var(--charcoal);
+            position: relative;
+        }
+
+        .gallery-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 5rem;
+        }
+
+        .gallery-header .section-label {
+            justify-content: center;
+        }
+
+        .gallery-header .section-label::after {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: var(--amber-deep);
+        }
+
+        .gallery-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--cream-light);
+            margin-bottom: 1rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 250px);
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: var(--charcoal-soft);
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(44, 36, 22, 0.6), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--charcoal-soft), var(--charcoal));
+            border: 1px solid rgba(196, 163, 90, 0.15);
+        }
+
+        .gallery-placeholder span {
+            color: var(--stone-warm);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 200px);
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                padding: 6rem 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .gallery-item,
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+                grid-row: span 1;
+                height: 250px;
+            }
+        }
+
         /* Nature Section */
         .nature {
             padding: 10rem 4rem;
@@ -732,10 +922,318 @@
             letter-spacing: 0.1em;
         }
 
+        /* Testimonials Section */
+        .testimonials {
+            padding: 10rem 4rem;
+            background: var(--cream-warm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--amber-deep));
+        }
+
+        .testimonials-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 5rem;
+        }
+
+        .testimonials-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--cream-light);
+            padding: 3rem 2.5rem;
+            border: 1px solid rgba(166, 144, 118, 0.15);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5rem;
+            color: var(--amber-warm);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(44, 36, 22, 0.1);
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--charcoal-soft);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--amber-warm), var(--forest-sage));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cream-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .testimonial-info h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 0.2rem;
+        }
+
+        .testimonial-info span {
+            font-size: 0.85rem;
+            color: var(--stone-warm);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 0.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-stars svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--amber-warm);
+        }
+
+        @media (max-width: 1024px) {
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .testimonials {
+                padding: 6rem 2rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 10rem 4rem;
+            background: var(--charcoal);
+            position: relative;
+        }
+
+        .faq-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 5rem;
+        }
+
+        .faq-header .section-label {
+            justify-content: center;
+        }
+
+        .faq-header .section-label::after {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: var(--amber-deep);
+        }
+
+        .faq-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--cream-light);
+            margin-bottom: 1rem;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(196, 163, 90, 0.2);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .faq-question h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--cream-light);
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover h3 {
+            color: var(--amber-warm);
+        }
+
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            flex-shrink: 0;
+            margin-left: 2rem;
+        }
+
+        .faq-icon::before,
+        .faq-icon::after {
+            content: '';
+            position: absolute;
+            background: var(--amber-warm);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-icon::before {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .faq-icon::after {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        .faq-item.active .faq-icon::after {
+            transform: translateX(-50%) rotate(90deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding-bottom: 2rem;
+        }
+
+        .faq-answer p {
+            color: var(--stone-light);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .faq {
+                padding: 6rem 2rem;
+            }
+
+            .faq-question h3 {
+                font-size: 1.1rem;
+            }
+        }
+
         /* Contact Section */
         .contact {
             padding: 10rem 4rem;
             background: var(--cream-light);
+        }
+
+        .contact-map {
+            margin-bottom: 6rem;
+            position: relative;
+            height: 400px;
+            background: var(--charcoal);
+            overflow: hidden;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(0.3) contrast(1.1);
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--charcoal-soft), var(--charcoal));
+            color: var(--stone-light);
+        }
+
+        .map-placeholder svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1.5rem;
+            color: var(--amber-warm);
+        }
+
+        .map-placeholder span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .map-placeholder p {
+            font-size: 0.9rem;
+            color: var(--stone-warm);
+            margin-top: 0.5rem;
         }
 
         .contact-grid {
@@ -911,10 +1409,157 @@
             color: var(--amber-warm);
         }
 
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border: 1px solid rgba(196, 181, 160, 0.3);
+            border-radius: 50%;
+            color: var(--stone-light);
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--amber-warm);
+            color: var(--amber-warm);
+            transform: translateY(-3px);
+        }
+
+        .footer-social svg {
+            width: 20px;
+            height: 20px;
+        }
+
         .footer-copyright {
             font-size: 0.85rem;
             color: var(--stone-warm);
             opacity: 0.6;
+        }
+
+        /* Enhanced Hover Micro-interactions */
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .hero-cta:hover::before {
+            transform: translateX(100%);
+        }
+
+        .nav-book-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-book-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .nav-book-btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .service-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .experience-icon {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .experience-item:hover .experience-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(196, 163, 90, 0.3);
+        }
+
+        .nature-feature {
+            transition: transform 0.3s ease;
+        }
+
+        .nature-feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .nature-feature-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .nature-feature:hover .nature-feature-icon {
+            transform: scale(1.15);
+        }
+
+        .contact-item {
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-item svg {
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover svg {
+            transform: scale(1.2);
+        }
+
+        .form-submit {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .form-submit:hover::before {
+            left: 100%;
+        }
+
+        .footer-links a {
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--amber-warm);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
         }
 
         /* Scroll Animations */
@@ -999,6 +1644,32 @@
                 display: flex;
             }
 
+            .nav-right {
+                display: none;
+            }
+
+            .nav-links.active ~ .nav-right,
+            .nav-right.mobile-visible {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: calc(100% + 140px);
+                left: 0;
+                right: 0;
+                background: var(--cream-warm);
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                border-top: 1px solid rgba(166, 144, 118, 0.2);
+            }
+
+            .nav-right .lang-selector {
+                justify-content: center;
+            }
+
+            .nav-right .nav-book-btn {
+                text-align: center;
+            }
+
             .philosophy,
             .services,
             .experience,
@@ -1037,8 +1708,17 @@
             <li><a href="#philosophy">Philosophy</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#experience">Experience</a></li>
+            <li><a href="#gallery">Gallery</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="nav-right">
+            <div class="lang-selector">
+                <button class="lang-btn active">EN</button>
+                <button class="lang-btn">LV</button>
+                <button class="lang-btn">RU</button>
+            </div>
+            <a href="#contact" class="nav-book-btn">Book Now</a>
+        </div>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
             <span></span>
             <span></span>
@@ -1172,6 +1852,41 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="gallery-header reveal">
+            <div class="section-label">Visual Journey</div>
+            <h2>Glimpses of Tranquility</h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item reveal">
+                <div class="gallery-placeholder">
+                    <span>Sauna Interior</span>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <div class="gallery-placeholder">
+                    <span>Forest Path</span>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <div class="gallery-placeholder">
+                    <span>Baltic Shore</span>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <div class="gallery-placeholder">
+                    <span>Guest Room</span>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <div class="gallery-placeholder">
+                    <span>Birch Whisks</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Nature Section -->
     <section class="nature">
         <div class="nature-content reveal">
@@ -1209,8 +1924,137 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-header reveal">
+            <div class="section-label">Guest Experiences</div>
+            <h2>Words from Our Visitors</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="testimonial-text">A transformative experience. The traditional pirts ritual reconnected me with something ancient and pure. The hosts understand that true wellness goes far beyond physical relaxation.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">M</div>
+                    <div class="testimonial-info">
+                        <h4>Marta K.</h4>
+                        <span>Riga, Latvia</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="testimonial-text">We came for a weekend and left feeling renewed. The birch whisks, herbal steam, and peaceful surroundings created magic. This is how a sauna should be experienced.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">J</div>
+                    <div class="testimonial-info">
+                        <h4>Johan & Anna</h4>
+                        <span>Stockholm, Sweden</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="testimonial-text">Authenticity at its finest. Unlike commercial spas, Miera Ligzda preserves the true spirit of Latvian bathing traditions. An unforgettable escape from modern life.</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">T</div>
+                    <div class="testimonial-info">
+                        <h4>Thomas R.</h4>
+                        <span>Berlin, Germany</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="faq-header reveal">
+            <div class="section-label">Common Questions</div>
+            <h2>Preparing for Your Visit</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item reveal">
+                <button class="faq-question">
+                    <h3>What should I bring to the pirts session?</h3>
+                    <span class="faq-icon"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>We provide towels, robes, and all necessary accessories including birch whisks. Simply bring yourself and comfortable clothing for before and after your session. Many guests also bring swimwear, though the traditional experience is enjoyed without.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-question">
+                    <h3>How long is a typical pirts ritual?</h3>
+                    <span class="faq-icon"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>A complete traditional pirts experience typically lasts 2-3 hours, including multiple rounds of steam, rest periods, and cooling. We never rush the ritual—the pace follows your body's natural rhythm and the guidance of our experienced pirts master.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-question">
+                    <h3>Is the pirts suitable for first-time visitors?</h3>
+                    <span class="faq-icon"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Absolutely. Our pirts master will guide you through every step of the ritual, adjusting the intensity to your comfort level. First-time visitors often become the most devoted, discovering a depth of relaxation they never knew possible.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-question">
+                    <h3>Can I book the space privately?</h3>
+                    <span class="faq-icon"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, private bookings are available for individuals, couples, or small groups. This allows for a more intimate experience tailored entirely to your preferences. Contact us directly to arrange a private session.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-question">
+                    <h3>What is the best time of year to visit?</h3>
+                    <span class="faq-icon"></span>
+                </button>
+                <div class="faq-answer">
+                    <p>Each season offers its own magic. Winter brings the contrast of icy air and warm steam, while summer allows for forest walks and Baltic Sea swims between sessions. Autumn's golden colors and spring's renewal each create unique atmospheres for healing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
+        <div class="contact-map reveal">
+            <div class="map-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span>Baltic Coast, Latvia</span>
+                <p>Near the sea, surrounded by forest</p>
+            </div>
+            <!-- Replace with Google Maps embed:
+            <iframe src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE" allowfullscreen loading="lazy"></iframe>
+            -->
+        </div>
         <div class="contact-grid">
             <div class="contact-info reveal">
                 <div class="section-label">Get in Touch</div>
@@ -1279,6 +2123,25 @@
             <span>Miera Ligzda</span>
         </div>
         <p class="footer-tagline">"Where steam meets spirit, and peace finds its nest."</p>
+        <div class="footer-social">
+            <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="2" y="2" width="20" height="20" rx="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="18" cy="6" r="1.5" fill="currentColor"/>
+                </svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z"/>
+                </svg>
+            </a>
+            <a href="#" aria-label="WhatsApp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+                </svg>
+            </a>
+        </div>
         <div class="footer-links">
             <a href="#philosophy">Philosophy</a>
             <a href="#services">Services</a>
@@ -1302,8 +2165,22 @@
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
+        const navRight = document.querySelector('.nav-right');
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            if (navRight) {
+                navRight.classList.toggle('mobile-visible');
+            }
+        });
+
+        // Language selector
+        const langBtns = document.querySelectorAll('.lang-btn');
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                langBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Language switching logic would go here
+            });
         });
 
         // Close mobile menu on link click
@@ -1350,6 +2227,21 @@
             // Add form submission logic here
             alert('Thank you for your inquiry! We will respond within 24 hours.');
             this.reset();
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const wasActive = item.classList.contains('active');
+                // Close all items
+                faqItems.forEach(i => i.classList.remove('active'));
+                // Open clicked item if it wasn't active
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
         });
 
         // Parallax effect for hero steam
