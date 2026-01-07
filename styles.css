@@ -204,6 +204,22 @@ h1, h2, h3, h4 {
     border-color: var(--amber-warm);
 }
 
+/* Mobile menu override - force dark colors when menu is open regardless of scroll state */
+@media (max-width: 768px) {
+    .nav:not(.scrolled) .nav-links.active a {
+        color: var(--charcoal) !important;
+    }
+
+    .nav:not(.scrolled) .nav-right.mobile-visible .lang-btn {
+        color: var(--charcoal) !important;
+    }
+
+    .nav:not(.scrolled) .nav-right.mobile-visible .lang-btn.active {
+        color: var(--amber-deep) !important;
+        border-color: var(--amber-deep) !important;
+    }
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -2020,13 +2036,20 @@ h1, h2, h3, h4 {
         padding: 1.5rem 2rem;
         gap: 1rem;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        max-height: none;
-        overflow: visible;
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
         z-index: 1000;
     }
 
     .nav-links.active {
-        display: flex;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .nav-links.active li:last-child {
+        display: block !important;
+        visibility: visible !important;
     }
 
     /* Force dark text color when mobile menu is open */
@@ -2039,18 +2062,14 @@ h1, h2, h3, h4 {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        height: auto !important;
+        overflow: visible !important;
     }
 
     .nav-links a {
         display: block;
         padding: 0.5rem 0;
         font-size: 1rem;
-    }
-
-    /* Ensure all 5 nav items show */
-    .nav-links li:nth-child(4),
-    .nav-links li:nth-child(5) {
-        display: block !important;
     }
 
     .mobile-menu-btn {
@@ -2066,7 +2085,7 @@ h1, h2, h3, h4 {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: calc(100% + 250px);
+        top: calc(100% + 280px);
         left: 0;
         right: 0;
         background: var(--cream-warm);
@@ -2074,6 +2093,16 @@ h1, h2, h3, h4 {
         gap: 1rem;
         border-top: 1px solid rgba(166, 144, 118, 0.2);
         z-index: 1000;
+    }
+
+    /* Force dark color on language buttons when menu is open */
+    .nav-right.mobile-visible .lang-btn {
+        color: var(--charcoal) !important;
+    }
+
+    .nav-right.mobile-visible .lang-btn.active {
+        color: var(--amber-deep) !important;
+        border-color: var(--amber-deep) !important;
     }
 
     .nav-right .lang-selector {
