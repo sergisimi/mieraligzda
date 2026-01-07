@@ -2033,13 +2033,14 @@ h1, h2, h3, h4 {
         right: 0;
         background: var(--cream-warm);
         flex-direction: column;
-        padding: 1rem 2rem;
-        gap: 0.6rem;
+        padding: 1.2rem 2rem 1.5rem 2rem;
+        gap: 0.8rem;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         max-height: none !important;
         height: auto !important;
         overflow: visible !important;
         z-index: 1000;
+        min-height: fit-content;
     }
 
     .nav-links.active {
@@ -2047,9 +2048,16 @@ h1, h2, h3, h4 {
         flex-direction: column !important;
     }
 
+    .nav-links.active li {
+        display: block !important;
+        visibility: visible !important;
+        margin-bottom: 0.2rem;
+    }
+
     .nav-links.active li:last-child {
         display: block !important;
         visibility: visible !important;
+        padding-bottom: 0.5rem;
     }
 
     /* Force dark text color when mobile menu is open */
@@ -2085,7 +2093,7 @@ h1, h2, h3, h4 {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: calc(100% + 180px);
+        top: calc(100% + 230px);
         left: 0;
         right: 0;
         background: var(--cream-warm);
