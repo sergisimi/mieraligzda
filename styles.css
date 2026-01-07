@@ -1776,9 +1776,11 @@ h1, h2, h3, h4 {
 
 .footer-links {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem 2rem;
     margin-bottom: 3rem;
+    padding: 0 1rem;
 }
 
 .footer-links a {
@@ -2015,8 +2017,8 @@ h1, h2, h3, h4 {
         right: 0;
         background: var(--cream-warm);
         flex-direction: column;
-        padding: 2rem;
-        gap: 1.5rem;
+        padding: 1.5rem 2rem;
+        gap: 1rem;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         max-height: none;
         overflow: visible;
@@ -2027,13 +2029,28 @@ h1, h2, h3, h4 {
         display: flex;
     }
 
+    /* Force dark text color when mobile menu is open */
+    .nav-links.active a {
+        color: var(--charcoal) !important;
+    }
+
     .nav-links li {
         width: 100%;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .nav-links a {
         display: block;
         padding: 0.5rem 0;
+        font-size: 1rem;
+    }
+
+    /* Ensure all 5 nav items show */
+    .nav-links li:nth-child(4),
+    .nav-links li:nth-child(5) {
+        display: block !important;
     }
 
     .mobile-menu-btn {
@@ -2049,11 +2066,11 @@ h1, h2, h3, h4 {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: calc(100% + 220px);
+        top: calc(100% + 250px);
         left: 0;
         right: 0;
         background: var(--cream-warm);
-        padding: 1.5rem 2rem;
+        padding: 1rem 2rem;
         gap: 1rem;
         border-top: 1px solid rgba(166, 144, 118, 0.2);
         z-index: 1000;
