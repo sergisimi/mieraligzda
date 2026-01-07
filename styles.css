@@ -2109,16 +2109,23 @@ h1, h2, h3, h4 {
         left: 0;
         right: 0;
         background: var(--cream-warm);
-        padding: 1rem 2rem;
+        padding: 1.5rem 2rem 1.5rem 2rem;
         gap: 0.8rem;
         border-top: 1px solid rgba(166, 144, 118, 0.2);
         z-index: 999;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
+    .nav-right.mobile-visible .lang-selector {
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+    }
+
     /* Force dark color on language buttons when menu is open */
     .nav-right.mobile-visible .lang-btn {
         color: var(--charcoal) !important;
+        padding: 0.5rem 0.8rem;
+        min-height: 36px;
     }
 
     .nav-right.mobile-visible .lang-btn.active {
